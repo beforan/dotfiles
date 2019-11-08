@@ -10,12 +10,13 @@ Each App folder should contain its own `README` covering the files included, dep
 
 # Index
 
-| Directory | App |
+| Path | App, Notes |
 | - | - |
 | `powershell/` | PowerShell and PowerShell Core |
 | `vscode/` | Visual Studio Code |
 | `wt/` | Windows Terminal |
-
+| `/.editorconfig` | The `.editorconfig` for this repo, can also be used as a global default |
+ 
 # Symlinking
 
 While not necessary, it's nice to clone this repo and then symlink the dotfiles to their expected paths.
