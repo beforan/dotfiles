@@ -12,6 +12,7 @@ Each App folder should contain its own `README` covering the files included, dep
 
 | Directory | App |
 | - | - |
+| `powershell/` | PowerShell and PowerShell Core |
 | `vscode/` | Visual Studio Code |
 | `wt/` | Windows Terminal |
 
