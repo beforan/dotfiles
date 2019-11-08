@@ -4,13 +4,16 @@ These are my dotfiles.
 
 Some of them aren't proper dotfiles but are otherwise settings files I want to keep centrally.
 
-Some of them have dependencies, and some day I'll probably have install scripts to setup a new machine from scratch with both dependencies and settings.
+Some of them have dependencies (beyond the app itself), and some day I'll probably have install scripts to setup a new machine from scratch with both dependencies and settings.
+
+Each App folder should contain its own `README` covering the files included, dependencies and any Symlinking info (e.g. paths)
 
 # Index
 
-| dir | App | Dependencies | SymLink |
-| - | - | - | - |
-| `wt/` | Windows Terminal | Windows Terminal, `Delugia NF` font, WSL, Ubuntu WSL, Powershell Core 6.x  | `~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState/profiles.json`
+| Directory | App |
+| - | - |
+| `wt/` | Windows Terminal  |
+| `vscode/` | Visual Studio Code | 
 
 # Symlinking
 
@@ -18,9 +21,9 @@ While not necessary, it's nice to clone this repo and then symlink the dotfiles 
 
 This is good because any updates to the files can be committed and pushed, rather than having to keep the repo in sync with the app's local version.
 
-This may not work for all apps, but that should be noted in the index.
+This may not work for all apps, but that should be noted in their `README`'s.
 
-In future an install script should handle symlinking.
+In future install scripts should handle symlinking.
 
 ## Windows (NTFS)
 
