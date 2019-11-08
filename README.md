@@ -12,8 +12,8 @@ Each App folder should contain its own `README` covering the files included, dep
 
 | Directory | App |
 | - | - |
-| `wt/` | Windows Terminal  |
-| `vscode/` | Visual Studio Code | 
+| `vscode/` | Visual Studio Code |
+| `wt/` | Windows Terminal |
 
 # Symlinking
 
