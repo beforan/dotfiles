@@ -12,10 +12,10 @@ Each App folder should contain its own `README` covering the files included, dep
 
 | Path | App, Notes |
 | - | - |
-| `powershell/` | PowerShell and PowerShell Core |
-| `vscode/` | Visual Studio Code |
-| `wt/` | Windows Terminal |
-| `/.editorconfig` | The `.editorconfig` for this repo, can also be used as a global default |
+| `powershell/` | PowerShell and [PowerShell Core] |
+| `vscode/` | [Visual Studio Code] |
+| `wt/` | [Windows Terminal] |
+| `/.editorconfig` | The [`.editorconfig`] for this repo, can also be used as a global default |
  
 # Symlinking
 
@@ -35,3 +35,8 @@ On Windows 10 enabling [Developer mode](https://docs.microsoft.com/en-us/windows
 
 cmd: `mklink <link path> <source path>`
 posh: `ni $link -it SymbolicLink -v $source`
+
+[PowerShell Core]: https://github.com/PowerShell/PowerShell
+[Visual Studio Code]: https://code.visualstudio.com/
+[Windows Terminal]: https://github.com/microsoft/terminal
+[`.editorconfig`]: https://editorconfig.org/
