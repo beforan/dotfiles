@@ -12,11 +12,12 @@ Each App folder should contain its own `README` covering the files included, dep
 
 | Path | App, Notes |
 | - | - |
-| `powershell/` | PowerShell and [PowerShell Core] |
+| `powershell/` | PowerShell and [PowerShell Core], my primary shell on Windows |
 | `vscode/` | [Visual Studio Code] |
-| `wt/` | [Windows Terminal] |
+| `wt/` | [Windows Terminal], the Terminal app I use on Windows |
+| `zsh/` | [Z Shell], my primary shell on Linux and macOS. Install using [Oh My Zsh] |
 | `/.editorconfig` | The [`.editorconfig`] for this repo, can also be used as a global default |
- 
+
 # Symlinking
 
 While not necessary, it's nice to clone this repo and then symlink the dotfiles to their expected paths.
@@ -44,3 +45,5 @@ posh: `ni $link -it SymbolicLink -v $source`
 [Visual Studio Code]: https://code.visualstudio.com/
 [Windows Terminal]: https://github.com/microsoft/terminal
 [`.editorconfig`]: https://editorconfig.org/
+[Z Shell]: https://en.wikipedia.org/wiki/Z_shell
+[Oh My Zsh]: https://github.com/robbyrussell/oh-my-zsh
