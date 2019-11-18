@@ -36,6 +36,10 @@ On Windows 10 enabling [Developer mode](https://docs.microsoft.com/en-us/windows
 cmd: `mklink <link path> <source path>`
 posh: `ni $link -it SymbolicLink -v $source`
 
+## Unix-likes (Linux, macOS etc)
+
+`ln -s <source path> <link path>`
+
 [PowerShell Core]: https://github.com/PowerShell/PowerShell
 [Visual Studio Code]: https://code.visualstudio.com/
 [Windows Terminal]: https://github.com/microsoft/terminal
