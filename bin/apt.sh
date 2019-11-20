@@ -7,6 +7,9 @@ sudo apt upgrade -y
 # curl and wget (wsl likes to not have basic stuff)
 sudo apt install curl wget -y
 
+# jq, so we can perform shenanigans with GitHub's API
+sudo apt install jq -y
+
 # zsh
 . ~/.dotfiles/zsh/bin/apt.sh
 
@@ -15,4 +18,5 @@ sudo apt install curl wget -y
 
 # we're done; remind user we haven't changed the default shell
 # becuase that's interactive
-echo "Use chsh to change the default shell to /bin/zsh if it isn't already"
+echo "✔ Installation complete"
+echo "ℹ Use chsh to change the default shell to /bin/zsh if it isn't already"
