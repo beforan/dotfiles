@@ -10,10 +10,12 @@ sudo apt install zsh -y
 # (unattended; does not set default shell)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
-# load zsh at this point so p10k will install correctly
-zsh
+# source the default config
+# it'll fail due to zsh syntax
+# but sets environment variables we need to finish installation
+. ./.zshrc
 
-# chuck omz's config and link ours
+# now chuck the default config and link ours
 cd ~
 rm .zshrc
 ln -s ./.dotfiles/zsh/.zshrc .zshrc

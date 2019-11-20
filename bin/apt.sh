@@ -9,3 +9,10 @@ sudo apt install curl wget -y
 
 # zsh
 . ~/.dotfiles/zsh/bin/apt.sh
+
+
+
+
+# we're done; remind user we haven't changed the default shell
+# becuase that's interactive
+echo "Use chsh to change the default shell to /bin/zsh if it isn't already"
