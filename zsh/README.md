@@ -5,6 +5,7 @@
 | File | Symlink path |
 | - | - |
 | `.zshrc` | `~/.zshrc` |
+| `.p10k.zsh` | `~/.p10k.zsh` |
 
 # Dependencies
 

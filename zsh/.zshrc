@@ -9,7 +9,11 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/beforan/.oh-my-zsh"
+if [ $PLATFORM = 'linux' ]; then
+   export ZSH="/home/beforan/.oh-my-zsh"
+elif [ $PLATFORM = 'freebsd' ]; then
+   export ZSH="/Users/beforan/.oh-my-zsh"
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -107,9 +111,9 @@ source $ZSH/oh-my-zsh.sh
 
 # make the user@host prompt section only display for remotes
 prompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-  fi
+  # if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+  #   prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  # fi
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
