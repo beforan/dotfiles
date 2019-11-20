@@ -13,10 +13,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # source the default config
 # it'll fail due to zsh syntax
 # but sets environment variables we need to finish installation
+cd ~
 . ./.zshrc
 
 # now chuck the default config and link ours
-cd ~
 rm .zshrc
 ln -s ./.dotfiles/zsh/.zshrc .zshrc
 
