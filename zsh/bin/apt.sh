@@ -13,18 +13,17 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # source the default config
 # it'll fail due to zsh syntax
 # but sets environment variables we need to finish installation
-cd ~
-. ./.zshrc
+. $HOME/.zshrc
 
 # now chuck the default config and link ours
-rm .zshrc
-ln -s ./.dotfiles/zsh/.zshrc .zshrc
+rm $HOME/.zshrc
+ln -s $DOTFILES_REPO/zsh/.zshrc $HOME/.zshrc
 
 ##
 # powerline10k
 ##
 
 # link the config first so it doesn't run interactive configuration
-ln -s ./.dotfiles/zsh/.p10k.zsh .p10k.zsh
+ln -s $DOTFILES_REPO/zsh/.p10k.zsh $HOME/.p10k.zsh
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
