@@ -1,3 +1,5 @@
+# Don't run directly; we depend on $DOTFILES_REPO
+
 ##
 # zsh
 ##

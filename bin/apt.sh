@@ -7,16 +7,8 @@ export DOTFILES_REPO=$HOME/$DOTFILES_REPO_NAME
 sudo apt update
 sudo apt upgrade -y
 
-# we don't install git because to get the repo you'd need it
-
-# curl and wget (wsl likes to not have basic stuff)
-sudo apt install curl wget -y
-
-# fontconfig to ensure we can install fonts
-sudo apt install fontconfig -y
-
-# jq, so we can perform shenanigans with API's such as GitHub
-sudo apt install jq -y
+# common dependencies of dotfiles scripts
+. $DOTFILES_REPO/bin/deps/apt.sh
 
 # zsh
 . $DOTFILES_REPO/zsh/bin/apt.sh

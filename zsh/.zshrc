@@ -9,11 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-if [ $PLATFORM = 'linux' ]; then
-   export ZSH="/home/beforan/.oh-my-zsh"
-elif [ $PLATFORM = 'freebsd' ]; then
-   export ZSH="/Users/beforan/.oh-my-zsh"
-fi
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
