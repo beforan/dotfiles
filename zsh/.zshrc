@@ -110,6 +110,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias please='sudo $(fc -ln -1)'
 
 # make the user@host prompt section only display for remotes
 prompt_context() {
