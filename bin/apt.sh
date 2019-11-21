@@ -7,13 +7,17 @@ sudo apt upgrade -y
 # curl and wget (wsl likes to not have basic stuff)
 sudo apt install curl wget -y
 
-# jq, so we can perform shenanigans with GitHub's API
+# fontconfig to ensure we can install fonts
+sudo apt install fontconfig -y
+
+# jq, so we can perform shenanigans with API's such as GitHub
 sudo apt install jq -y
 
 # zsh
 . ~/.dotfiles/zsh/bin/apt.sh
 
-
+# fonts referenced by configs
+. ~/.dotfiles/bin/fonts/linux.sh
 
 
 # we're done; remind user we haven't changed the default shell
