@@ -10,13 +10,20 @@ Each App folder should contain its own `README` covering the files included, dep
 
 # Index
 
-| Path | App, Notes |
-| - | - |
-| `powershell/` | PowerShell and [PowerShell Core], my primary shell on Windows |
-| `vscode/` | [Visual Studio Code] |
-| `wt/` | [Windows Terminal], the Terminal app I use on Windows |
-| `zsh/` | [Z Shell], my primary shell on Linux and macOS. Install using [Oh My Zsh] |
+| Path             | App, Notes                                                                |
+| ---------------- | ------------------------------------------------------------------------- |
+| `powershell/`    | PowerShell and [PowerShell Core], my primary shell on Windows             |
+| `wt/`            | [Windows Terminal], the Terminal app I use on Windows                     |
+| `zsh/`           | [Z Shell], my primary shell on Linux and macOS. Install using [Oh My Zsh] |
 | `/.editorconfig` | The [`.editorconfig`] for this repo, can also be used as a global default |
+
+## Things which aren't here that you might expect
+
+### VS Code
+
+All my VS Code user files are synced by the settings sync extension to a github gist.
+This is compatible with codespaces (GitHub and Azure), and is less effort than maintaining through dotfiles and symlinking
+for extensions, snippets etc...
 
 # Symlinking
 
@@ -41,9 +48,9 @@ posh: `ni $link -it SymbolicLink -v $source`
 
 `ln -s <source path> <link path>`
 
-[PowerShell Core]: https://github.com/PowerShell/PowerShell
-[Visual Studio Code]: https://code.visualstudio.com/
-[Windows Terminal]: https://github.com/microsoft/terminal
+[powershell core]: https://github.com/PowerShell/PowerShell
+[visual studio code]: https://code.visualstudio.com/
+[windows terminal]: https://github.com/microsoft/terminal
 [`.editorconfig`]: https://editorconfig.org/
-[Z Shell]: https://en.wikipedia.org/wiki/Z_shell
-[Oh My Zsh]: https://github.com/robbyrussell/oh-my-zsh
+[z shell]: https://en.wikipedia.org/wiki/Z_shell
+[oh my zsh]: https://github.com/robbyrussell/oh-my-zsh

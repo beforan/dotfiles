@@ -8,7 +8,7 @@
 
 # Dependencies
 
-- [`DelugiaCode NF`](https://github.com/adam7/delugia-code/releases) font
+- [`Cascadia Code PL`](https://github.com/microsoft/cascadia-code/releases) font
 - WSL
   - Ubuntu
 - Powershell Core 6.x
