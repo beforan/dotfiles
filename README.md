@@ -21,9 +21,7 @@ Each App folder should contain its own `README` covering the files included, dep
 
 ### VS Code
 
-All my VS Code user files are synced by the settings sync extension to a github gist.
-This is compatible with codespaces (GitHub and Azure), and is less effort than maintaining through dotfiles and symlinking
-for extensions, snippets etc...
+VS Code settings are synced using the official settings sync to my GitHub account.
 
 # Symlinking
 

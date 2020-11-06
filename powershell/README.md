@@ -25,7 +25,3 @@ To allow unelevated running of Windows Terminal for everyday use, I use posh as 
 
 - [Oh My Posh!](https://github.com/JanDeDobbeleer/oh-my-posh)
   - PoshGit
-
-### Notes
-
-Technically these depend on `PSReadLine` but that ships with PowerShell since `5.x`.
