@@ -42,6 +42,10 @@ On Windows 10 enabling [Developer mode](https://docs.microsoft.com/en-us/windows
 cmd: `mklink <link path> <source path>`
 posh: `ni $link -it SymbolicLink -v $source`
 
+NOTE: symlinking must use absolute paths for both elements (source and target!).
+
+This includes unpacking aliases in powershell (such as `~/` which must be expanded to `C:\Users\<user>\`
+
 ## Unix-likes (Linux, macOS etc)
 
 `ln -s <source path> <link path>`

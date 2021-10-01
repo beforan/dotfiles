@@ -15,7 +15,7 @@
       "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoLogo",
       "colorScheme": "Brogrammer",
       "cursorShape": "filledBox",
-      "fontFace": "Cascadia Code PL",
+      "fontFace": "CaskaydiaCove NF",
       "fontSize": 14,
       "backgroundImage": "https://media.giphy.com/media/fwYXbiepDv4MbwmquK/source.gif",
       "backgroundImageOpacity": 0.5,
@@ -28,7 +28,7 @@
       "name": "Ubuntu",
       "colorScheme": "Ubuntu",
       "cursorShape": "filledBox",
-      "fontFace": "Cascadia Code PL",
+      "fontFace": "CaskaydiaCove NF",
       "fontSize": 14,
       "startingDirectory": "//wsl$/Ubuntu/home/beforan",
       "source": "Windows.Terminal.Wsl"

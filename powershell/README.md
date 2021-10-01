@@ -8,6 +8,8 @@ To allow unelevated running of Windows Terminal for everyday use, I use posh as 
   - from the `WinKey + X` menu
   - simpler profile due to lack of font support / intended use
 
+Since Windows 11 better integrates Windows Terminal, however, using PS Core in WT for elevated use is now viable, though having the default profile linked may still be useful in some scenarios.
+
 # Files
 
 | File | Symlink path |
@@ -20,8 +22,11 @@ To allow unelevated running of Windows Terminal for everyday use, I use posh as 
 ## Both
 
 - [DirColors](https://github.com/DHowett/DirColors)
+  - `Install-Module DirColors`
 
 ## Core
 
-- [Oh My Posh!](https://github.com/JanDeDobbeleer/oh-my-posh)
-  - PoshGit
+- [Oh My Posh!](https://ohmyposh.dev/docs/pwsh)
+  - PoshGit - `Install-Module posh-git`
+  - git (a local install, not embedded in a client like gitkraken)
+    - `cinst git -y`

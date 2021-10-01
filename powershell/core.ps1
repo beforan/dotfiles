@@ -6,13 +6,9 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 
-# optionally set this to the username on your local machine
-# to hide the user@host prompt for that username
-$DefaultUser = "Jon"
-
 Import-Module posh-git
 Import-Module oh-my-posh
-Set-Theme Paradox
+Set-PoshPrompt -Theme iterm2
 
 Import-Module DirColors
 
