@@ -32,9 +32,7 @@
     # base system stuff
 
     # viable stuff currently layered in rpm-ostree:
-    # nodejs
     # python? # in many distros it would be there by default like bash - not sure about nixos. we can add per-project versions via nix or venv too
-    # btop
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -50,13 +48,12 @@
     # tools
     alejandra
     dotnet-sdk_8
+    nodejs_20
 
     # apps
-    vscode
+    vscode # TODO use programs.vscode? not sure if needed
     gitkraken # TODO may not need if lazygit is awesome
-    lazygit
     jetbrains.rider
-    github-cli
     # jetbrains.datagrip
 
     # # You can also create simple shell scripts directly inside your
@@ -71,6 +68,9 @@
     enable = true;
     includes = [{path = "~/src/.dotfiles/.gitconfig";}];
   };
+
+  programs.lazygit.enable = true;
+  programs.btop.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -120,24 +120,9 @@
     # '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/beforan/etc/profile.d/hm-session-vars.sh
-  #
+  # Environment Variables
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    # EDITOR = "nano";
     VISUAL = "code";
   };
 
