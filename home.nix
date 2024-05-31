@@ -98,6 +98,11 @@
   # other utilities
   programs.btop.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   # dev tooling
 
   # git
