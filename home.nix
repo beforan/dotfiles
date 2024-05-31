@@ -40,9 +40,7 @@
     # # fonts?
     (nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
 
-    # warp-terminal # this might be nice once the package matures
     cheat
-    starship # TODO manage config from here!
 
     # "global" dev environment stuff
     # tools
@@ -88,6 +86,11 @@
       s = "$HOME/src";
     };
     initExtra = builtins.readFile ./.zshrc;
+  };
+
+  programs.starship = {
+    enable = true;
+    settings = pkgs.lib.importTOML ./starship.toml;
   };
 
   programs.eza = {
