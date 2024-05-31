@@ -2,8 +2,6 @@
 
 These are my dotfiles.
 
-Some of them aren't proper dotfiles but are otherwise settings files I want to keep centrally.
-
 Rather than scripts to put things in place and symlink, my prevailing approach now is to use Nix to do as much as possible declaratively.
 
 For now the focus is standalone Nix on linux.
@@ -52,12 +50,14 @@ The above activation is straightforward; the annoyance is that now:
 
 ##### Workarounds
 
-- Aliases/functions for the above commands to always specify the extra arguments
 - symlinks:
     - `home.nix` to the standard location `~/.config/home-manager/home.nix`
     - `flake.nix` to the standard location `~/.config/home-manager/flake.nix`
     - TODO: could we do this symlinking *IN HOME MANAGER* so that on the first run it does it for us?
+- Aliases/functions for the above commands to always specify the extra arguments
+- check out your dotfiles repo to `~/.config/home-manager`
+    - this only works while the home-manager flake and config remain in the repo root...
 
 ## Old dotfiles
 
-My previous setup which *did* use scripts to put stuff in place across windows, linux and macos, to different extents, is still available on the `legacy` branch.
+My previous setup which *did* use scripts to put stuff in place across windows, linux and macos (to different extents) is still available on the `legacy` branch.

@@ -32,7 +32,6 @@
     # base system stuff
 
     # viable stuff currently layered in rpm-ostree:
-    # git # would be nice to config via programs.git.enable as well
     # nodejs
     # python? # in many distros it would be there by default like bash - not sure about nixos. we can add per-project versions via nix or venv too
     # btop
@@ -71,6 +70,11 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  programs.git = {
+    enable = true;
+    includes = [{path = "~/src/.dotfiles/.gitconfig";}];
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
