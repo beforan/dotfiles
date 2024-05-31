@@ -34,7 +34,22 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
+
+      # defaults. not sure what a comprehensive list of these is...
+      # or how the defaults correspond to what I've set in the gui over the years...
+      system.defaults = {
+          dock.autohide = true;
+          dock.mru-spaces = false;
+      };
+
       security.pam.enableSudoTouchIdAuth = true;
+
+      # support rosetta
+      # still requires manual installation tho:
+      # `softwareudpate --install-rosetta --agree-to-license`
+      nix.extraOptions = ''
+        extra-platforms = x86_64-darwin aarch64-darwin
+      '';
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
