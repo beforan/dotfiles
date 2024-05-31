@@ -1,17 +1,4 @@
-# We don't do the typical bootstrapping of oh-my-zsh as home-manager does that
-# but we can provide additional config here
-
-HYPHEN_INSENSITIVE="true"
-
-# User configuration
-
-# Aliases / Functions
-# alias zshconfig="mate ~/.zshrc"
-alias dotfiles="code ~/src/.dotfiles"
-
-function lsd () {
-  eza --icons $1
-}
+#-- dotfiles .zshrc begin --
 
 # TODO: install pipx in home-manager?
 # Created by `pipx` on 2023-12-30 20:47:16
@@ -30,4 +17,4 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
+#-- dotfiles .zshrc end --

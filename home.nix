@@ -43,10 +43,7 @@
     (nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
 
     # warp-terminal # this might be nice once the package matures
-    bat
-    eza
     cheat
-    atuin
     starship # TODO manage config from here!
 
     # "global" dev environment stuff
@@ -80,12 +77,31 @@
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
       enable = true;
-      theme = ""; # no theme because we use starship for the prompt
       plugins = [
         "git"
       ];
     };
+    shellAliases = {
+      dotfiles = "code ~/src/.dotfiles";
+    };
+    dirHashes = {
+      s = "$HOME/src";
+    };
     initExtra = builtins.readFile ./.zshrc;
+  };
+
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    icons = true;
+    git = true;
+  };
+
+  programs.bat.enable = true;
+
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
