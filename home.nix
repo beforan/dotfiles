@@ -29,24 +29,20 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # base system stuff
-
-    # viable stuff currently layered in rpm-ostree:
-    # python? # in many distros it would be there by default like bash - not sure about nixos. we can add per-project versions via nix or venv too
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     (nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
 
-    cheat
-
     # "global" dev environment stuff
     # tools
     alejandra
     dotnet-sdk_8
     nodejs_20
+
+    python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
+    pipx
 
     # apps
     vscode # TODO use programs.vscode? not sure if needed
@@ -62,14 +58,7 @@
     # '')
   ];
 
-  programs.git = {
-    enable = true;
-    includes = [{path = "~/src/.dotfiles/.gitconfig";}];
-  };
-
-  programs.lazygit.enable = true;
-  programs.btop.enable = true;
-
+  # terminal /shell stuff
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
@@ -85,7 +74,6 @@
     dirHashes = {
       s = "$HOME/src";
     };
-    initExtra = builtins.readFile ./.zshrc;
   };
 
   programs.starship = {
@@ -107,7 +95,28 @@
     enableZshIntegration = true;
   };
 
+  # other utilities
+  programs.btop.enable = true;
+
+  # dev tooling
+
+  # git
+  programs.git = {
+    enable = true;
+    includes = [{path = "~/src/.dotfiles/.gitconfig";}];
+  };
+  programs.lazygit.enable = true;
+
   programs.bun.enable = true;
+
+  programs.poetry = {
+    enable = true;
+    settings = {
+      virtualenvs.create = true;
+      virtualenvs.in-project = true;
+    };
+    # TODO: poethepoet?
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
