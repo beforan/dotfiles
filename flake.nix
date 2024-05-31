@@ -18,8 +18,6 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    defaultPackage.${system} = home-manager.defaultPackage.${system}; # easily bootstrap home-manager from this flake
-
     homeConfigurations."beforan" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
