@@ -10,22 +10,25 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      defaultPackage.${system} = home-manager.defaultPackage.${system}; # easily bootstrap home-manager from this flake
-      
-      homeConfigurations."beforan" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    defaultPackage.${system} = home-manager.defaultPackage.${system}; # easily bootstrap home-manager from this flake
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
+    homeConfigurations."beforan" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
+      # Specify your home configuration modules here, for example,
+      # the path to your home.nix.
+      modules = [./home.nix];
+
+      # Optionally use extraSpecialArgs
+      # to pass through arguments to home.nix
     };
+  };
 }
