@@ -103,6 +103,7 @@
   # git
   programs.git = {
     enable = true;
+    delta.enable = true;
     includes = [{path = "~/src/.dotfiles/.gitconfig";}];
   };
   programs.lazygit.enable = true;
