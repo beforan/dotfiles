@@ -35,7 +35,6 @@
     # nodejs
     # python? # in many distros it would be there by default like bash - not sure about nixos. we can add per-project versions via nix or venv too
     # btop
-    # zsh # programs.zsh.enable would be ideal, and remove hm-session-vars from .zshrc # TODO manage config from here!
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -76,8 +75,22 @@
     includes = [{path = "~/src/.dotfiles/.gitconfig";}];
   };
 
+  programs.zsh = {
+    enable = true;
+    syntaxHighlighting.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      theme = ""; # no theme because we use starship for the prompt
+      plugins = [
+        "git"
+      ];
+    };
+    initExtra = builtins.readFile ./.zshrc;
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
+
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
