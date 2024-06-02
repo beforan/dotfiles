@@ -1,35 +1,20 @@
+{ pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
-  nixpkgs = {
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-    };
+  nixpkgs.config = {
+    # Disable if you don't want unfree packages
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = _: true;
   };
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "beforan";
-  home.homeDirectory = "/home/beforan";
+  home.stateVersion = "24.05";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.username = "beforan"; # For now, at least, this is always the same
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    # # It is sometimes useful to fine-tune packages, for example, by applying
+
+  # TODO modularise this lot
+  home.packages = with pkgs; [    
+    # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
@@ -43,6 +28,7 @@
 
     python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
     pipx
+
 
     # apps
     vscode # TODO use programs.vscode? not sure if needed
@@ -58,8 +44,8 @@
     # '')
   ];
 
-  # terminal /shell stuff
-  programs.zsh = {
+  # terminal /shell stuff 
+  programs.zsh = { # TODO do we do this at system level on non-standalone installs?
     enable = true;
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
@@ -78,7 +64,7 @@
 
   programs.starship = {
     enable = true;
-    settings = pkgs.lib.importTOML ../dotfiles/starship.toml;
+    settings = pkgs.lib.importTOML ../../dotfiles/starship.toml;
   };
 
   programs.eza = {
@@ -146,6 +132,5 @@
     VISUAL = "code";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
