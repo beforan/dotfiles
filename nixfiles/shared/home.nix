@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   nixpkgs.config = {
     # Disable if you don't want unfree packages
     allowUnfree = true;
@@ -11,9 +10,8 @@
 
   home.username = "beforan"; # For now, at least, this is always the same
 
-
   # TODO modularise this lot
-  home.packages = with pkgs; [    
+  home.packages = with pkgs; [
     # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -29,6 +27,7 @@
     python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
     pipx
 
+    azure-cli
 
     # apps
     vscode # TODO use programs.vscode? not sure if needed
@@ -44,8 +43,9 @@
     # '')
   ];
 
-  # terminal /shell stuff 
-  programs.zsh = { # TODO do we do this at system level on non-standalone installs?
+  # terminal /shell stuff
+  programs.zsh = {
+    # TODO do we do this at system level on non-standalone installs?
     enable = true;
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
