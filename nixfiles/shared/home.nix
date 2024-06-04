@@ -21,7 +21,7 @@
     # "global" dev environment stuff
     # tools
     alejandra
-    dotnet-sdk_8
+    dotnetCorePackages.sdk_8_0
     nodejs_20
 
     python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
