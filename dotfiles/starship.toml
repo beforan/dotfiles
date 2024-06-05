@@ -1,111 +1,130 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """\
-[](bg:#030B16 fg:#7DF9AA)\
-$os\
-$username\
-$hostname\
-$localip\
-$shlvl\
+# generally speaking:
+# Nerdfont icons: yes
+# icons better than words
+# clean prompt area
+
+# the basic idea of the format here
+# is to keep less regularly used features discoverable
+# so we turn everything on,
+# but only really configure stuff we know about.
+# when new contextual stuff is discovered, it can be configured then.
+
+# we use left and right prompts
+# line 1: unconfigured stuff
+# line 2: path                    env?
+# line 3: time, prompt            duration
+
+add_newline = true
+
+format = """
 $singularity\
 $kubernetes\
-[](fg:#7DF9AA bg:#3B76F0)\
-$directory\
-$vcsh\
-$fossil_branch\
-$fossil_metrics\
-[](fg:#3B76F0 bg:#FCF392)\
-$git_branch\
-$git_commit\
-$git_state\
-$git_metrics\
-$git_status\
-$hg_branch\
-[](fg:#FCF392 bg:#030B16)\
+$shlvl\
+$nats\
 $pijul_channel\
-$docker_context\
-$package\
+$pulumi\
+$conda\
+$bun\
+$buf\
 $c\
 $cmake\
-$cobol\
+$crystal\
 $daml\
 $dart\
 $deno\
+$direnv\
 $dotnet\
 $elixir\
 $elm\
 $erlang\
 $fennel\
 $gleam\
-$golang\
-$guix_shell\
+$go\
+$gradle\
 $haskell\
 $haxe\
 $helm\
 $java\
 $julia\
 $kotlin\
-$gradle\
 $lua\
+$meson\
 $nim\
 $nodejs\
 $ocaml\
+$odin\
 $opa\
+$openstack\
+$package\
 $perl\
 $php\
-$pulumi\
 $purescript\
 $python\
 $quarto\
-$raku\
 $rlang\
-$red\
+$raku\
 $ruby\
+$red\
 $rust\
 $scala\
 $solidity\
-$swift\
-$terraform\
-$typst\
-$vlang\
-$vagrant\
-$zig\
-$buf\
-$nix_shell\
-$conda\
-$meson\
 $spack\
-$memory_usage\
-$aws\
-$gcloud\
-$openstack\
-$azure\
-$nats\
-$direnv\
-$env_var\
-$crystal\
-$custom\
-$sudo\
-$cmd_duration\
+$swift\
+$typst\
+$vagrant\
+$vlang\
+$zig\
+
+$terraform\
+$docker_context\
+$nix_shell\
+$container\
+
 $line_break\
-$jobs\
+[](bg:#030B16 fg:#3B76F0)\
+$directory\
+[](fg:#3B76F0 bg:#FCF392)\
+
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$fossil_branch\
+$fossil_metrics\
+$hg_branch\
+$vcsh\
+[](fg:#FCF392 bg:#030B16)\
+
+$line_break\
 $battery\
 $time\
 $status\
-$container\
-$shell\
-$character
+$os\
+$character\
+"""
+
+right_format = """
+$username\
+$hostname\
+$localip\
+
+$cmd_duration\
+$jobs\
 """
 
 [os]
 disabled = false
-style = "bg:#7DF9AA fg:#090c0c"
+# style = "bg:#7DF9AA fg:#090c0c"
+
 
 [os.symbols]
 # TODO: add more NF icons as needed https://starship.rs/config/#os
-Fedora = " "
-Linux = " "
-Macos = "󰀵 "
+Fedora = "  "
+Linux = "  "
+Macos = " 󰀵 "
 
 [directory]
 format = "[   $path ]($style)"
@@ -130,14 +149,14 @@ format = "[  $duration ]($style)"
 style = "fg:bright-white bg:18"
 
 [character]
-success_symbol = '[ ➜](bold green) '
-error_symbol = '[ ✗](#E84D44) '
+success_symbol = '[➜](bold green)'
+error_symbol = '[✗](#E84D44)'
 
 [time]
 disabled = false
-time_format = "%R"             # Hour:Minute Format
-style = "fg:#8DFBD2"           # bg:#1C3A5E
-format = '[ 󱑍 $time ]($style)'
+time_format = "%R"           # Hour:Minute Format
+style = "fg:#8DFBD2"         # bg:#1C3A5E
+format = '[󱑍 $time]($style)'
 
 [dotnet]
 format = "[ $symbol($version )\\($tfm\\) ]($style)"
