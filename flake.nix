@@ -15,6 +15,11 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixGL = {
+      url = "github:nix-community/nixGL/310f8e49a149e4c9ea52f1adf70cdc768ec53f8a";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -23,6 +28,7 @@
     mac-app-util,
     nix-darwin,
     nixpkgs,
+    nixGL,
   }: let
     # reusable home-manager config when
     # home-manager is used as a nix module (nixos or darwin)
@@ -49,6 +55,9 @@
         modules = [
           ./nixfiles/cloud/home.nix
         ];
+        extraSpecialArgs = {
+          inherit inputs;
+        };
       };
     };
 

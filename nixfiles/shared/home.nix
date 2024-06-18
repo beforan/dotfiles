@@ -1,4 +1,19 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
+  nixGLIntel = inputs.nixGL.packages."${pkgs.system}".nixGLIntel;
+  nixVulkanIntel = inputs.nixGL.packages."${pkgs.system}".nixVulkanIntel;
+in {
+  imports = [
+    (builtins.fetchurl {
+      url = "https://raw.githubusercontent.com/Smona/home-manager/nixgl-compat/modules/misc/nixgl.nix";
+      sha256 = "74f9fb98f22581eaca2e3c518a0a3d6198249fb1490ab4a08f33ec47827e85db";
+    })
+  ];
+
   nixpkgs.config = {
     # Disable if you don't want unfree packages
     allowUnfree = true;
@@ -12,6 +27,9 @@
 
   # TODO modularise this lot
   home.packages = with pkgs; [
+    nixGLIntel
+    nixVulkanIntel
+
     # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -35,6 +53,8 @@
     jetbrains.rider
     # jetbrains.datagrip
 
+    (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)
+
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -42,6 +62,8 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  nixGL.prefix = "${nixGLIntel}/bin/nixGLIntel ${nixVulkanIntel}/bin/nixVulkanIntel";
 
   # terminal /shell stuff
   programs.zsh = {
