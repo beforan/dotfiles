@@ -83,7 +83,27 @@
     # TODO should I do this in a shared config?
     # darwinPackages = self.darwinConfigurations."Shadow".pkgs;
 
-    # Some day
-    # nixosConfigurations = {}
+    # NixOS configurations
+    # Build NixOS flake using:
+    # $ sudo nixos-rebuild switch --flake .
+    nixosConfigurations.auron = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./nixfiles/auron/configuration.nix
+
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users.beforan = import ./nixfiles/auron/home.nix;
+        }
+      ];
+      specialArgs = {
+        inherit inputs;
+      };
+    };
   };
 }
