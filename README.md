@@ -124,6 +124,16 @@ Given the above, installing differs depending on the host operating system and t
 
 As I'm adopting this gradually, primarily on non-NixOS hosts, some key things are provided elsewise by the system.
 
+### Flatpak
+
+In many cases, GUI apps via Flatpak is a preference if they're not core things.
+
+Or if they are but aren't nicely done via nixpkgs/home-manager.
+
+Examples:
+- Edge
+- Godot
+
 ### Things I would do as System Packages if I could
 
 - Docker / Podman?

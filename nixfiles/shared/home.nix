@@ -50,8 +50,8 @@ in {
     # apps
     vscode # TODO use programs.vscode? not sure if needed
     gitkraken # TODO may not need if lazygit is awesome
-    # jetbrains.rider
-    # jetbrains.datagrip
+    jetbrains.rider
+    jetbrains.datagrip
 
     # TODO flatpak godot probably
     # (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)

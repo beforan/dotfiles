@@ -1,15 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../shared/configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../shared/configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -88,7 +89,7 @@
   };
 
   # enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -97,7 +98,7 @@
     useDefaultShell = true;
     isNormalUser = true;
     description = "Jon Couldridge";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
     ];
   };
@@ -110,11 +111,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     wget
     fastfetch
     kdePackages.discover
+    ptyxis
+  ];
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    kate
+    konsole
+    oxygen
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -126,16 +134,16 @@
   # };
 
   # List services that you want to enable:
-  services.fprintd.enable = true;  
+  services.fprintd.enable = true;
 
-  services.flatpak.enable = true;  
+  services.flatpak.enable = true;
 
-  virtualisation.docker.enable = true;  
+  virtualisation.docker.enable = true;
 
-  virtualisation.libvirtd.enable = true;  
-  programs.virt-manager.enable = true;  
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
-  services.onedrive.enable = true;  
+  services.onedrive.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -153,5 +161,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
