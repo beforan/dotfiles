@@ -1,0 +1,26 @@
+# this docker compose is for useful
+# persistent local development services
+
+name: dev-docker
+
+services:
+  pg:
+    image: postgres:16
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes: 
+          - ./volumes/postgres-data:/var/lib/postgresql/data:Z
+  adminer:
+    image: wodby/adminer
+    depends_on:
+      - pg
+    restart: always
+    ports:
+      - 8080:9000
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: pgsql
+      ADMINER_DEFAULT_DB_HOST: pg
+      ADMINER_DESIGN: pepa-linha
