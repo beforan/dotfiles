@@ -117,6 +117,7 @@
     fastfetch
     kdePackages.discover
     ptyxis
+    onedriver
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -142,8 +143,6 @@
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
-
-  services.onedrive.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
