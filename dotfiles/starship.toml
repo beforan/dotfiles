@@ -117,6 +117,7 @@ $jobs\
 
 [os]
 disabled = false
+format = " [$symbol]($style) "
 # style = "bg:#7DF9AA fg:#090c0c"
 
 
