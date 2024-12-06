@@ -2,26 +2,19 @@
 
 These are my dotfiles.
 
-Rather than scripts to put things in place and symlink, my prevailing approach now is to use Nix to do as much as possible declaratively.
+Rather than scripts to put things in place and symlink, my prevailing approach now is to use [Nix Home Manager] to do as much as possible declaratively.
 
-For now the focus is standalone Nix Home Manager on linux, and nix-darwin (with Home Manager) on macOS.
+- To learn about the approach, and when (and when not) to use **Home Manager**, keep reading.
+- Dive into how to [setup a Host](readme/host-setup.md).
+- Read Guidance on Configuration Files and the structure used in this repo.
 
-In time perhaps NixOS eventually.
+## General Approach
 
-More docs to follow as stuff takes shape.
+The idea is to use **Nix Home Manager** to manage as much as possible, as that's the most portable between different Hosts.
 
-## Nix
+Ideally we automate the installation and configuration of as much as we can, and make differents Hosts as similar as possible.
 
-- Have Nix; everything else here relies on it.
-- Enable flakes.
-- Distros like Bazzite will preconfigure all this
-- Typically if installing Nix yourself, use https://github.com/DeterminateSystems/nix-installer which also enables Flakes by default.
-
-### Home Manager
-
-We do as much as possible (that's not system configuration) in Home Manager, as that's the most portable netween different setups.
-
-Nix Home Manager:
+**Nix Home Manager**:
 
 - takes care of installing user packages/apps as specified in `home.nix`.
 - takes care of dotfile configuration by:
@@ -29,129 +22,42 @@ Nix Home Manager:
   - applying configuration from files in this repo (in `/dotfiles`)
   - symlinking configuration from files in this repo (just like the old scripts did, but from one central standardised location) (in `/dotfiles`)
 
-## Setting up a host
+### Host Operating Systems
 
-Setting up a hot depends on the host's operating system.
+With this [general approach](#general-approach) in mind, the way that you use **Nix Home Manager** depends on the Host machine's Operating System.
 
-In this repo, all Nix related files except the root flake definition (`flake.nix`) are located in `/nixfiles`.
+| OS | Home Manager | Notes |
+|-|-|-|
+| [NixOS][Nix] | NixOS Module | The NixOS Linux distribution, running **Home Manager** as a NixOS module |
+| macOS | [`nix-darwin`][nix-darwin] Module | Apple Mac managed by **`nix-darwin`** with **Home Manager** running as a module |
+| Other Linux | Standalone | Any Linux distribution, with **Home Manager** installed and configured by Nix |
 
-In there is a shared folder, for shared system configuration (`configuration.nix`), shared Home Manager configuration (`home.nix`), and potentially other shared modules designed for composing modules together in different ways, or otherwise just to keep file lengths down.
+In a standalone configuration, **Home Manager** is used to declaratively manage the Host system's User Environments. Since [Nix] is installed, it can also be used for Development Environments, but that's outside of the scope of this documentation.
 
-Also each host has its own folder, containing a host specific Home Manager configuration (`home.nix`) and if it's not a standalone system a host specific system configuration (`configuration.nix`).
+In **NixOS** and **`nix-darwin`** environments, in addition to the above, the Host's system configuration can also be managed declaratively using **Nix**.
 
-Here's the above as structured in the repo:
+### When not to use **Home Manager**?
 
-```
-/
-├─ dotfiles/              # actual config files, set up by Home Manager
-├─ nixfiles/              # nix files
-│  ├─ cloud/                # a Linux host, managed by standalone Home Manager
-│  │  ├─ home.nix             # Home Manager configuration
-│  ├─ Shadow/               # a macOS host, managed by nix-darwin
-│  │  ├─ configuration.nix    # nix-darwin system configuration
-│  │  ├─ home.nix             # Home Manager configuration
-│  ├─ shared/               # shared modules
-│  │  ├─ configuration.nix    # system configuration
-│  │  ├─ home.nix             # Home Manager configuration
-├─ flake.nix              # root flake definition
-```
+Above we state that we use **Home Manager** as much as possible. But when is it not possible, or not advisable?
 
-The relevance of host operating system plays out as follows, then:
-
-- NixOS
-  - NixOS hosts will:
-    - be added to the root flake under `nixOsConfigurations`
-    - have a `configuration.nix`
-      - imports `shared/configuration.nix` and possibly other modules
-      - sets host specific NixOS config.
-    - use Home Manager as a NixOS module
-    - have a `home.nix`
-      - imports `shared/home.nix` and possibly other modules
-      - sets host specific Home Manager config
-- macOS (e.g. `Shadow` above)
-  - macOS hosts will:
-    - be added to the root flake under `darwinConfigurations`
-    - have a `configuration.nix`
-      - imports `shared/configuration.nix` and possibly other modules
-      - sets host specific NixOS config.
-    - use Home Manager as a nix-darwin module
-    - have a `home.nix`
-      - imports `shared/home.nix` and possibly other modules
-      - sets host specific Home Manager config
-- Other Linux (e.g. `cloud` above)
-  - Other Linux hosts will:
-    - be added to the root flake under `homeConfigurations`
-    - use Home Manager in Standalone mode
-    - have a `home.nix`
-      - imports `shared/home.nix` and possibly other modules
-      - sets host specific Home Manager config
-    - _NOT_ have a `configuration.nix`
-
-### Installing
-
-Given the above, installing differs depending on the host operating system and the Nix/Home Manager approach in use.
-
-> [!TIP]
-> In the below, `path-to-flake-directory` is to the root of this repo, where `flake.nix` is.
->
-> Note that you'll need to specify the flake path each time you run rebuild.
-
-- NixOS
-  - run `nix-rebuild switch --flake <path-to-flake-directory>`
-  - Home Manager installation will happen as part of system configuration
-- macOS (nix-darwin)
-  - install Nix (prefer: https://github.com/DeterminateSystems/nix-installer)
-  - run `darwin-rebuild switch --flake <path-to-flake-directory>`
-  - Home Manager installation will happen as part of system configuration
-- Other Linux (Standalone Home Manager)
-  - install Nix if necessary
-    - prefer: https://github.com/DeterminateSystems/nix-installer
-    - Some distros (e.g. Fedora Bazzite) come with it
-  - install Home Manager per the [Standalone Flake docs](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone)
-    - bear in mind, we don't need to `init` as we already have a configuration prepared.
-    - so for the first run:
-      - `nix run home-manager/$branch -- switch --flake <path-to-flake-directory>`
-      - `$branch` in this configuration should be at least `release-24.05`, or `master`.
-    - subsequent `switch` runs may use the now installed `home-manager` command:
-      - `home-manager switch --flake <path-to-flake-directory>`
+What do we instead in those cases?
 
 > [!NOTE]
-> It may be worth noting that a flake-based configuration of Home Manager in a non-default location (e.g. where this repo is checked out) requires passing the path of `home.nix` when using `home-manager edit` (e.g. `home-manager edit -f <path-to-home.nix>`).
->
-> Given this, and the structure of the nixfiles in this repo, using `home-manager edit` is not recommended over simply opening the repo/files in an editor directly.
+> Here are some suggestions:
+> 
+> - [Flatpak](readme/sources/flatpak.md)
+> - [Homebrew](readme/sources/brew.md)
+> - [Nix System Packages](readme/sources/host-nix.md)
+> - [Host Native Sources](readme/sources/host-native.md)
 
-## What's not managed here?
+A thorough breakdown of options is available [here](readme/no-home-manager.md).
 
-As I'm adopting this gradually, primarily on non-NixOS hosts, some key things are provided elsewise by the system.
-
-### Flatpak
-
-In many cases, GUI apps via Flatpak is a preference if they're not core things.
-
-Or if they are but aren't nicely done via nixpkgs/home-manager.
-
-Examples:
-- Edge
-- Godot
-
-### Things I would do as System Packages if I could
-
-- Docker / Podman?
-- a shiny terminal such as alacritty or kitty
-- web browser?
-
-### Things Fedora Bazzite layers via rpm-ostree
-
-- Podman
-
-### macOS oddities?
-
-- None so far, given the above exceptions...
-
-### Things standalone Home Manager doesn't like
-
-- some graphical apps e.g. kitty, alacritty...
+Bear in mind that what alternative options are available will depend somewhat on the [Host Operating System](#host-operating-systems).
 
 ## Old dotfiles
 
 My previous setup which _did_ just use scripts to put stuff in place across windows, linux and macos (to different extents) is still available on the `legacy` branch.
+
+[Nix Home Manager]: https://nix-community.github.io/home-manager/
+[Nix]: https://nixos.org/
+[nix-darwin]: https://github.com/LnL7/nix-darwin/

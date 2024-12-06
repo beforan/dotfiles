@@ -118,7 +118,6 @@
     fastfetch
     kdePackages.discover
     ptyxis
-    onedriver
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [

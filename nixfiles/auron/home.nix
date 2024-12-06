@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ../shared/home.nix
+    ../shared/home.standalone.nix
+    ../shared/home.dev.nix
   ];
 
   home.homeDirectory = "/home/beforan";
@@ -10,6 +12,6 @@
   # or may want to amend other targets to favour shared home manager /shrug
 
   home.packages = with pkgs; [
-    bitwarden-desktop
+    # if we return to being a NixOS host, these packages may be preferable at a system level instead
   ];
 }

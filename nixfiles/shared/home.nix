@@ -36,25 +36,9 @@ in {
     # # fonts?
     (nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
 
-    # "global" dev environment stuff
-    # tools
-    alejandra
-    dotnetCorePackages.sdk_8_0
-    nodejs_20
-
-    python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
-    pipx
-
-    azure-cli
-
-    # apps
-    vscode # TODO use programs.vscode? not sure if needed
-    gitkraken # TODO may not need if lazygit is awesome
-    jetbrains.rider
-    jetbrains.datagrip
-
-    # TODO flatpak godot probably
-    # (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)
+    ## Core dev packages
+    alejandra # assume systems using nix might need to edit nix
+    # TODO: vs code? or should it be flatpak/native?
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -68,9 +52,19 @@ in {
 
   # terminal /shell stuff
   programs.zsh = {
-    # TODO do we do this at system level on non-standalone installs?
     enable = true;
     syntaxHighlighting.enable = true;
+    plugins = [
+      {
+        name = "zsh-nvm";
+        src = pkgs.fetchFromGitHub {
+          owner = "lukechilds";
+          repo = "zsh-nvm";
+          rev = "745291dcf20686ec421935f1c3f8f3a2918dd106";
+          sha256 = "sha256-4O1a5bsNoqwB0hB8YU1fEVafsPQK8l7jr3GlF68ckZg=";
+        };
+      }
+    ];
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -113,7 +107,7 @@ in {
     config = builtins.fromTOML "hide_env_diff = true";
   };
 
-  # dev tooling
+  # core dev tooling
 
   # git
   programs.git = {
@@ -122,17 +116,6 @@ in {
     includes = [{path = "~/src/.dotfiles/dotfiles/.gitconfig";}];
   };
   programs.lazygit.enable = true;
-
-  programs.bun.enable = true;
-
-  programs.poetry = {
-    enable = true;
-    settings = {
-      virtualenvs.create = true;
-      virtualenvs.in-project = true;
-    };
-    # TODO: poethepoet?
-  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -152,7 +135,7 @@ in {
 
   # Environment Variables
   home.sessionVariables = {
-    # EDITOR = "nano";
+    EDITOR = "nano";
     VISUAL = "code";
   };
 

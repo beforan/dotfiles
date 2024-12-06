@@ -59,6 +59,15 @@
           inherit inputs;
         };
       };
+      "beforan@auron" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [
+          ./nixfiles/auron/home.nix
+        ];
+        extraSpecialArgs = {
+          inherit inputs;
+        };
+      };
     };
 
     # Build darwin flake using:
@@ -86,24 +95,27 @@
     # NixOS configurations
     # Build NixOS flake using:
     # $ sudo nixos-rebuild switch --flake .
-    nixosConfigurations.auron = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./nixfiles/auron/configuration.nix
+    
+    # Auron is currently Fedora + Home Manager
+    # Configuration below remains as an example for a NixOS Host
+    # nixosConfigurations.auron = nixpkgs.lib.nixosSystem {
+    #  system = "x86_64-linux";
+    #  modules = [
+    #    ./nixfiles/auron/configuration.nix
 
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+    #    home-manager.nixosModules.home-manager
+    #    {
+    #      home-manager.useGlobalPkgs = true;
+    #      home-manager.useUserPackages = true;
 
-          home-manager.users.beforan = import ./nixfiles/auron/home.nix;
-        }
-      ];
-      specialArgs = {
-        inherit inputs;
-      };
-    };
+    #      home-manager.users.beforan = import ./nixfiles/auron/home.nix;
+    #    }
+    #  ];
+    #  specialArgs = {
+    #    inherit inputs;
+    #  };
+    #};
   };
 }
