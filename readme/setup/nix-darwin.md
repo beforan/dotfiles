@@ -21,6 +21,8 @@ You can install Nix any way you like.
 
 The [Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer) is recommended.
 
+Note that for use with `nix-darwin` the `--determinate` flag should NOT be used. The README does explain this, but just to be clear.
+
 ## Enabling Flakes
 
 If you used the Determinate Installer above, flakes are enabled.
