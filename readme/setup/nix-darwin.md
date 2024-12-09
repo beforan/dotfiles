@@ -33,6 +33,16 @@ Otherwise search to discover how to enable flakes for your Nix installation.
 
 Refer to Configuration File guidance to prepare your Host configuration.
 
+### Set Hostname
+
+Remember that the root `flake.nix` uses Hostnames to load and apply Host configurations.
+
+So it's vital that your Host has the correct intended name.
+
+On modern macOS (Mavericks+) you can do `sudo hostname -s <MyHostName>` to set it.
+
+### Apply
+
 At this point, the root `flake.nix` has enough configuration to setup both `nix-darwin` and Home Manager using your prepared configuration.
 
 Activate it as follows:
