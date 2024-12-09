@@ -47,7 +47,7 @@ At this point, the root `flake.nix` has enough configuration to setup both `nix-
 
 Activate it as follows:
 
-- (First run: `nix run darwin-rebuild -- switch --flake <path-to-flake-directory>`)
+- (First run: `nix run nix-darwin -- switch --flake <path-to-flake-directory>`)
 - run `darwin-rebuild switch --flake <path-to-flake-directory>`
   - Home Manager installation will happen as part of system configuration
 
