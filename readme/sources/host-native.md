@@ -25,4 +25,7 @@ etc.
 
 # GUI Apps
 
+- Browsers:
+  - Edge for macOS.
+    - For Linux: Flatpak
 - VS Code (if not Flatpak, then native)
