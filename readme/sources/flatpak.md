@@ -10,3 +10,20 @@ Examples:
 
 Some core things are arguably preferred via Flatpak if not provided by other means:
 - Ptyxis - if not provided by the distro, Flatpak is the preferred distribution for this
+
+# System tools
+
+- Terminal emulators
+  - Ptyxis - if not provided by the distro, use Flatpak
+  - iTerm2 - install via Nix configuration
+  - ...?
+
+# Command Line Tools
+
+# GUI Apps
+
+- VS Code (if not Flatpak, then native)
+- Web Browsers
+  - Edge
+    - Linux: Flatpak
+    - macOS: Native
