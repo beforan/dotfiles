@@ -23,6 +23,8 @@ etc.
 
 # Command Line Tools
 
+- Homebrew, on macOS
+
 # GUI Apps
 
 - Browsers:
