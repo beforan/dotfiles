@@ -21,4 +21,6 @@ This is Host dependent:
 
 ## NixOS only
 
+- Docker, via `virtualization.docker.enable = true;`
+
 ## macOS (`nix-darwin`) only
