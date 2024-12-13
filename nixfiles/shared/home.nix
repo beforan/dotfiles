@@ -131,6 +131,11 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    # TODO: either setup a dotfile or use a vim programs entry
+    ".vimrc".text = ''
+      syntax on
+    '';
   };
 
   # Environment Variables

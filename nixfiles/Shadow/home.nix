@@ -9,5 +9,14 @@
     ../shared/home.nix
   ];
 
+  home.packages = with pkgs; [
+    minikube # TODO: k8s shared modules?
+    
+    slack # TODO: work shared module?
+    
+    # TODO: macos specific shared stuff?
+    iina
+  ];
+
   home.homeDirectory = "/Users/beforan";
 }
