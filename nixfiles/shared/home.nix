@@ -25,8 +25,9 @@ in {
 
   home.username = "beforan"; # For now, at least, this is always the same
 
-  # TODO modularise this lot
   home.packages = with pkgs; [
+    bitwarden-desktop
+
     # nixGLIntel # TODO move nixGL only to machines that need it
     # nixVulkanIntel
 

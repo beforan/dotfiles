@@ -28,6 +28,10 @@
 
     # TODO flatpak godot probably
     # (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)
+
+    # k8s
+    minikube
+    kubectl
   ];
 
   # TODO: maybe per project flake?
