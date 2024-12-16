@@ -40,6 +40,11 @@ Some advice:
 - Don't add it to `$PATH` or otherwise do any Shell Initialization (e.g. `conda init`)
   - instead use the `conda-activate` zsh alias in these dotfiles to activate the `(base)` environment and then go from there.
 
+### Miniconda gotchas
+
+- Jupyter Notebooks
+  - Miniconda doesn't install this by default like Anaconda Distribution. Just do `conda install jupyter`
+
 # GUI Apps
 
 - Browsers:
