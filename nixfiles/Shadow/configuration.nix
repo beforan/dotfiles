@@ -1,6 +1,7 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ../shared/configuration.nix
+    # TODO: Shared macOS configuration?
   ];
 
   # The platform the configuration will be used on.
@@ -14,10 +15,9 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs;
-    [
-      iterm2
-    ];
+  environment.systemPackages = with pkgs; [
+    iterm2
+  ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -33,12 +33,11 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-
   # defaults. not sure what a comprehensive list of these is...
   # or how the defaults correspond to what I've set in the gui over the years...
   system.defaults = {
-      dock.autohide = true;
-      dock.mru-spaces = false;
+    dock.autohide = true;
+    dock.mru-spaces = false;
   };
 
   security.pam.enableSudoTouchIdAuth = true;
@@ -49,5 +48,4 @@
   nix.extraOptions = ''
     extra-platforms = x86_64-darwin aarch64-darwin
   '';
-
 }

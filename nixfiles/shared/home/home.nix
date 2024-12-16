@@ -1,3 +1,8 @@
+# This is the BASE Home Manager configuration for ALL Hosts.
+#
+# It is imported by more specific system configurations e.g. `./darwin.nix`
+# Use the most specific system configuration modules you can in your Host configuration
+#
 {
   config,
   pkgs,
@@ -21,12 +26,12 @@ in {
     allowUnfreePredicate = _: true;
   };
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home.username = "beforan"; # For now, at least, this is always the same
 
   home.packages = with pkgs; [
-    bitwarden-desktop
+    # bitwarden-desktop # TODO: not on macos
 
     # nixGLIntel # TODO move nixGL only to machines that need it
     # nixVulkanIntel

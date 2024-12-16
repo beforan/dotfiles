@@ -1,17 +1,13 @@
 {pkgs, ...}: {
   imports = [
-    ../shared/home.nix
-    ../shared/home.standalone.nix
-    ../shared/home.dev.nix
+    ../shared/home/linux.standalone.nix
+    ../shared/home/dev/linux.nix
+    ../shared/home/dev/k8s/home.nix
   ];
 
   home.homeDirectory = "/home/beforan";
 
-  # stuff here to stay out of macos/ublue's way
-  # may want modularising differently later if there are more nixos targets
-  # or may want to amend other targets to favour shared home manager /shrug
-
   home.packages = with pkgs; [
-    # if we return to being a NixOS host, these packages may be preferable at a system level instead
+    # if we return to being a NixOS host, these packages may be preferable at a system level (`./configuration.nix`) instead
   ];
 }

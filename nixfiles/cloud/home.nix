@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ../shared/home.nix
-    ../shared/home.standalone.nix
+    ../shared/home/linux.standalone.nix
   ];
 
   home.homeDirectory = "/home/beforan";

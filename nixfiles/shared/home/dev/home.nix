@@ -1,4 +1,9 @@
-# This module is for "global" (but via home manager) dev environment stuff
+# This is the BASE module for "global" (but via home manager) dev environment stuff
+#
+# It is imported by more specific system configurations e.g. `./linux.nix`
+# Use the most specific system configuration modules you can in your Host configuration
+#
+#
 #  - Bear in mind due to idiosyncracies, many apps (and dependent runtimes) are easier
 #    installed via Flatpak or even directly where the system allows (i.e. non Atomic distros).
 #  - As a result many of these are not managed by home manager currently while we work out the best way
@@ -10,29 +15,20 @@
   home.packages = with pkgs; [
     ## Tools / SDKs
 
-    # dotnetCorePackages.sdk_8_0
+    # no node - nvm is installed with zsh in `shared/home.nix`, so use that to manage user-space node versions
 
     python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
     pipx
 
-    # azure-cli
-
-    # no node - nvm is installed with zsh in `shared/home.nix`, so use that to manage user-space node versions
-
     ## Apps
 
-    # vscode # TODO use programs.vscode? not sure if needed
     # gitkraken # TODO may not need if lazygit is awesome
 
-    jetbrains-toolbox # nix for this, but it then installs jb stuff "locally" in home
-
-    # TODO flatpak godot probably
+    # TODO flatpak godot probably?
     # (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)
-
-    # k8s
-    minikube
-    kubectl
   ];
+
+  programs.vscode.enable = true;
 
   # TODO: maybe per project flake?
   programs.bun.enable = true;

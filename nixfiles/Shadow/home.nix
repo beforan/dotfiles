@@ -4,17 +4,15 @@
   ...
 }: {
   imports = [
-    # TODO consider darwin shared config, or better shared home manager module config
     inputs.mac-app-util.homeManagerModules.default
-    ../shared/home.nix
-    ../shared/home.dev.nix
+    ../shared/home/darwin.nix
+    ../shared/home/dev/home.nix
+    ../shared/home/dev/k8s/home.nix
+    ../shared/home/work/home.nix
   ];
 
   home.packages = with pkgs; [
-    slack # TODO: work shared module?
-
-    # TODO: macos specific shared stuff?
-    iina
+    # Host specific packages
   ];
 
   home.homeDirectory = "/Users/beforan";

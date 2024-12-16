@@ -14,7 +14,9 @@ In there is a `shared` folder, for:
 
 - shared system configuration (`configuration.nix`)
 - shared Home Manager configuration (`home.nix`)
+  - with system-specific variants e.g. `darwin.nix`, `linux.standalone.nix`
 - optional shared sub-modules (see below) designed for composing modules together in different ways, or otherwise just to keep file lengths down.
+  - with system-specific variants e.g. `linux.nix`, `darwin.aarch64.nix`
 
 Also each host has its own folder, containing:
 
@@ -25,40 +27,74 @@ Here's the above as structured in the repo:
 
 ```
 /
-├─ dotfiles/              # actual config files, set up by Home Manager
-├─ nixfiles/              # nix files
-│  ├─ example-nixos-host/   # a Linux host, running NixOS
-│  │  ├─ configuration.nix    # NixOS system configuration
-│  │  ├─ home.nix             # Home Manager configuration
-│  ├─ cloud/                # a Linux host, managed by standalone Home Manager
-│  │  ├─ home.nix             # Home Manager configuration
-│  ├─ Shadow/               # a macOS host, managed by nix-darwin
-│  │  ├─ configuration.nix    # nix-darwin system configuration
-│  │  ├─ home.nix             # Home Manager configuration
-│  ├─ shared/               # shared modules
-│  │  ├─ configuration.nix    # system configuration for all hosts
-│  │  ├─ home.nix             # Home Manager configuration for all hosts
-│  │  ├─ home.dev.nix         # Home Manager Dev submodule
-│  │  ├─ home.standalone.nix    # Home Manager submodule for all standalone Home Manager hosts
-├─ flake.nix              # root flake definition
+├─ dotfiles/                  # actual config files, set up by Home Manager
+├─ nixfiles/                  # nix files
+│  ├─ example-nixos-host/       # a Linux host, running NixOS
+│  │  ├─ configuration.nix        # NixOS system configuration
+│  │  ├─ home.nix                 # Home Manager configuration
+│  ├─ cloud/                    # a Linux host, managed by standalone Home Manager
+│  │  ├─ home.nix                 # Home Manager configuration
+│  ├─ Shadow/                   # a macOS host, managed by nix-darwin
+│  │  ├─ configuration.nix        # nix-darwin system configuration
+│  │  ├─ home.nix                 # Home Manager configuration
+│  ├─ shared/                   # shared modules
+│  │  ├─ home/                    # Home Manager modules
+|  |  |  |- dev/                    # Dev submodules
+|  |  |  |  |- k8s/                   # Kubernetes Dev submodules
+|  |  |  |  |  |- home.nix              # BASE Kubernetes Dev submodule (for all hosts)
+|  |  |  |  |- home.nix               # BASE Dev submodule (for all hosts)
+|  |  |  |  |- linux.nix              # Dev submodule for all Linux hosts
+|  |  |  |- work/                    # Work submodules
+|  |  |  |  |- home.nix               # BASE Work submodule (for all hosts)
+|  |  |  |- darwin.nix                # Home Manager submodule for all macOS hosts
+|  |  |  |- home.nix                # BASE Home Manager module (for all hosts)
+|  |  |  |- linux.standalone.nix    # Home Manager submodule for all Linux Standalone (not NixOS) hosts
+│  │  ├─ configuration.nix        # Nix configuration for all hosts
+├─ flake.nix                  # root flake definition
 ```
 
-### Shared Home Manager Submodules
+### Shared Home Manager Modules
 
-Submodules are effectively nested and you'd typically expect to always include the parent of a child module you're importing, as the children gfet more specific and optional.
+#### System Variants
 
-For example if you wanted to import a hypothetical `home.dev.python.nix` to add python tooling to your setup, you would import all of the following:
+The Shared Home Manager Modules are all presented as a "BASE" module, containing configuration for ALL hosts, and then increasingly specific system variants where required.
+
+The system-specific variants always import their less-specific siblings, and so hosts should always import the most specific applicable module.
+
+e.g. where the available files are:
 
 - `home.nix`
-- `home.dev.nix`
-- `home.dev.python.nix`
-- any other branches of submodule you want, such as `home.standalone.nix`
+- `darwin.nix`
+- `darwin.aarch64.nix`
+- `linux.standalone.nix`
 
-This is because `home.dev.python.nix` will only add the python specific packages and programs; it is assumed you (and other dev environments) will want the common dev tooling from `home.dev.nix` as well.
+Then the below hosts would import files as follows:
+
+- Apple Silicon macOS - `darwin.aarch64.nix` (imports `darwin.nix` and `home.nix`)
+- Intel macOS - `darwin.nix` (imports `home.nix`)
+- Any Arch Fedora Linux - `linux.standalone.nix` (imports `home.nix`)
+- Any Arch NixOS - `home.nix`
+
+#### Optional Submodules
+
+Submodules are nested, but independent.
+
+Each deeper nested level is an optional extension of its parents, so you'd typically expect to always include the parent of a child module you're importing, as the children get more specific and optional.
+
+For example if you wanted to add Kubernetes development tools to your setup, you'd import all the following from `/shared/home/`:
+
+- `home.nix`*
+- `dev/home.nix`
+- `dev/k8s/home.nix`
+- any other branches of submodules you want, such as `work/home.nix`
+
+* bear in mind that `home.nix` is always the BASE module; you may actually import a more specific variant e.g. `darwin.nix`
+
+This is because `dev/k8s/home.nix` will only add the Kubernetes specific packages and programs; it is assumed you (and other dev environments) will want the common dev tooling from `dev/home.nix` as well.
 
 Lifting common things into parent modules helps keep things DRY.
 
-Having Hosts explicitly import all modules they want rather than chaining imports helps keep things flexible and composable.
+Having Hosts explicitly import all modules they want rather than chaining imports helps keep things flexible and composable, and makes Host configuration imports clearer.
 
 ## Configuration by Host Type
 
@@ -78,7 +114,7 @@ Below is a breakdown of configuration file structure based on the different poss
     - use Home Manager as a NixOS module
     - have a `home.nix`
       - imports:
-        - `shared/home.nix`
+        - `shared/home/home.nix`
         - optionally other Home Manager sub-modules
       - sets host specific Home Manager config
 - macOS (`nix-darwin`) - e.g. `Shadow`
@@ -90,7 +126,7 @@ Below is a breakdown of configuration file structure based on the different poss
     - use Home Manager as a nix-darwin module
     - have a `home.nix`
       - imports:
-        - `shared/home.nix`
+        - `shared/home/darwin.nix`
         - optionally other Home Manager sub-modules
       - sets host specific Home Manager config
 - Other Linux (Standalone Home Manager) - e.g. `cloud`
@@ -99,8 +135,7 @@ Below is a breakdown of configuration file structure based on the different poss
     - use Home Manager in Standalone mode
     - have a `home.nix`
       - imports:
-        - `shared/home.nix`
-        - `shared/home.standalone.nix`
+        - `shared/home/linux.standalone.nix`
         - optionally other Home Manager sub-modules
       - sets host specific Home Manager config
     - _NOT_ have a `configuration.nix`
