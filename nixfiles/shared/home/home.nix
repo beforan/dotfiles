@@ -87,7 +87,7 @@ in {
 
   programs.starship = {
     enable = true;
-    settings = pkgs.lib.importTOML ../../dotfiles/starship.toml;
+    settings = pkgs.lib.importTOML ../../../dotfiles/starship.toml;
   };
 
   programs.eza = {
@@ -119,7 +119,7 @@ in {
   programs.git = {
     enable = true;
     delta.enable = true;
-    includes = [{path = "~/src/.dotfiles/dotfiles/.gitconfig";}];
+    includes = [{path = "~/src/.dotfiles/dotfiles/.gitconfig";}]; # TODO: make this less hardcoded to the target checkout path?
   };
   programs.lazygit.enable = true;
 
