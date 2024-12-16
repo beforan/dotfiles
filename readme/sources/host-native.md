@@ -25,6 +25,21 @@ etc.
 
 - Homebrew, on macOS
 
+## Anaconda
+
+Anaconda doesn't play nice with Nix.
+
+Hopefully for typical Python dev Nix + Poetry works for me, possibly in per-project Flakes. But sometimes I need Anaconda.
+
+Since Anaconda is itself an isolated userspace tool, it's not so bad. Install it natively.
+
+Some advice:
+
+- install it to `$HOME/conda` rather than the default
+  - this works with zsh aliases and stuff in these dotfiles, and doesn't care if you use Anaconda Distribution or Miniconda
+- Don't add it to `$PATH` or otherwise do any Shell Initialization (e.g. `conda init`)
+  - instead use the `conda-activate` zsh alias in these dotfiles to activate the `(base)` environment and then go from there.
+
 # GUI Apps
 
 - Browsers:

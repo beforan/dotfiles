@@ -44,7 +44,6 @@ in {
 
     ## Core dev packages
     alejandra # assume systems using nix might need to edit nix
-    # TODO: vs code? or should it be flatpak/native?
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -79,6 +78,7 @@ in {
     };
     shellAliases = {
       dotfiles = "code ~/src/.dotfiles";
+      conda-activate = "source ~/conda/bin/activate";
     };
     dirHashes = {
       s = "$HOME/src";
@@ -114,6 +114,8 @@ in {
   };
 
   # core dev tooling
+
+  # programs.vscode.enable = true; # TODO: should it be here? it's currently in `/home/dev`
 
   # git
   programs.git = {
