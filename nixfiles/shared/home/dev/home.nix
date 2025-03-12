@@ -17,8 +17,8 @@
 
     # no node - nvm is installed with zsh in `shared/home.nix`, so use that to manage user-space node versions
 
-    python312 # ensure a system version of python is available; mainly for pipx. Projects should use venvs and/or nix
-    pipx
+    # python312 # Python and nix is kinda ALL IN so let's not do it here # TODO: what about as a system package on NixOS?
+    # if desirable, instead do it with per-project flakes
 
     ## Apps
 
@@ -32,14 +32,4 @@
 
   # TODO: maybe per project flake?
   programs.bun.enable = true;
-
-  # TODO: maybe per project flake?
-  programs.poetry = {
-    enable = true;
-    settings = {
-      virtualenvs.create = true;
-      virtualenvs.in-project = true;
-    };
-    # TODO: poethepoet?
-  };
 }
