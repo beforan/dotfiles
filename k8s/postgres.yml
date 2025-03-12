@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  ports:
+    - port: 5432
+      targetPort: postgres
+  selector:
+    app: postgres
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-adminer
+spec:
+  ports:
+    - port: 8080
+      targetPort: adminer
+  selector:
+    app: postgres
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - image: postgres:16
+          name: postgres
+          env:
+            # Use secret in real usage
+            - name: POSTGRES_PASSWORD
+              value: postgres
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: postgres-persistent-storage
+              mountPath: /var/lib/postgresql/data
+        - image: wodby/adminer
+          name: adminer
+          env:
+            - name: ADMINER_DEFAULT_DB_DRIVER
+              value: pgsql
+            - name: ADMINER_DEFAULT_DB_HOST
+              value: postgres
+            - name: ADMINER_DESIGN
+              value: pepa-linha
+          ports:
+            - containerPort: 9000
+              name: adminer
+      volumes:
+        - name: postgres-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
