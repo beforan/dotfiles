@@ -5,6 +5,10 @@
     ../shared/home/dev/k8s/home.nix
   ];
 
+  # ONLY update on complete host reinstall
+  # https://github.com/nix-community/home-manager/issues/5794
+  home.stateVersion = "24.11";
+
   home.homeDirectory = "/home/beforan";
 
   home.packages = with pkgs; [

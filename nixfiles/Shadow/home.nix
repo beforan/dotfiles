@@ -11,6 +11,10 @@
     ../shared/home/work/home.nix
   ];
 
+  # ONLY update on complete host reinstall
+  # https://github.com/nix-community/home-manager/issues/5794
+  home.stateVersion = "24.11";
+
   home.packages = with pkgs; [
     # Host specific packages
   ];

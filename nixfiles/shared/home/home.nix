@@ -26,8 +26,6 @@ in {
     allowUnfreePredicate = _: true;
   };
 
-  home.stateVersion = "24.11";
-
   home.username = "beforan"; # For now, at least, this is always the same
 
   home.packages = with pkgs; [
