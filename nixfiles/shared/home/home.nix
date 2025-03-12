@@ -83,6 +83,11 @@ in {
     dirHashes = {
       s = "$HOME/src";
     };
+    # TODO: should we always add snaps? what if snapd is not installed?
+    initExtra = ''
+      export PATH=/home/beforan/opt/appimage:$PATH
+      export PATH=$PATH:/snap/bin
+    '';
   };
 
   programs.starship = {
