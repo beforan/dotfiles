@@ -78,7 +78,7 @@ in {
     };
     shellAliases = {
       dotfiles = "code ~/src/.dotfiles";
-      conda-activate = "source ~/conda/bin/activate";
+      conda-activate = "source ~/opt/conda/bin/activate";
     };
     dirHashes = {
       s = "$HOME/src";
