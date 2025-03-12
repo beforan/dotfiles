@@ -29,16 +29,18 @@ in {
   home.username = "beforan"; # For now, at least, this is always the same
 
   home.packages = with pkgs; [
+    # NOTE: It is sometimes useful to fine-tune packages, for example, by applying
+    # overrides. You can do that directly here, just don't forget the
+    # parentheses.
+
     # bitwarden-desktop # TODO: not on macos
 
     # nixGLIntel # TODO move nixGL only to machines that need it
     # nixVulkanIntel
 
-    # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    (nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
+    # Nerd Fonts
+    nerd-fonts.fantasque-sans-mono
+    nerd-fonts.caskaydia-cove
 
     ## Core dev packages
     alejandra # assume systems using nix might need to edit nix
@@ -96,7 +98,7 @@ in {
   programs.eza = {
     enable = true;
     enableZshIntegration = true;
-    icons = true;
+    icons = "auto";
     git = true;
   };
 
