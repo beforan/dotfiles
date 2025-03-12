@@ -16,6 +16,15 @@ etc.
 
 # System tools
 
+- Python (+ pip + pipx)
+  - Python and Nix is potentially weird and annoying, so sadly we don't have a nice declarative way to do this
+  - Install Python3 the recommended native way
+    - your OS may come with it!
+  - Install pip the recommended native way
+    - your OS may come with it
+    - if in doubt `python -m ensure-pip --upgrade`
+  - Install pipx the recommended native way
+  - or consider sacking off all the above and just using [uv](https://docs.astral.sh/uv/)
 - Docker
   - For Linux, often comes with distros, otherwise install it "the normal way"
   - For NixOS, install via Nix configuration
@@ -34,6 +43,8 @@ Hopefully for typical Python dev Nix + Poetry works for me, possibly in per-proj
 Since Anaconda is itself an isolated userspace tool, it's not so bad. Install it natively.
 
 Some advice:
+
+`// TODO: find a better $HOME based path than just $HOME/conda to avoid polluting home`
 
 - install it to `$HOME/conda` rather than the default
   - this works with zsh aliases and stuff in these dotfiles, and doesn't care if you use Anaconda Distribution or Miniconda
