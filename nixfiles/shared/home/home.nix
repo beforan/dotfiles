@@ -6,6 +6,8 @@
 {
   config,
   pkgs,
+  stable,
+  unstable,
   inputs,
   ...
 }: let
@@ -28,19 +30,19 @@ in {
 
   home.username = "beforan"; # For now, at least, this is always the same
 
-  home.packages = with pkgs; [
+  home.packages = with unstable; [
     # NOTE: It is sometimes useful to fine-tune packages, for example, by applying
     # overrides. You can do that directly here, just don't forget the
-    # parentheses.
+    # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # NOTE: we do nerdfonts the "old" way from stable for now
+    # TODO: move to the new way
+    (stable.nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
 
     # bitwarden-desktop # TODO: not on macos
 
     # nixGLIntel # TODO move nixGL only to machines that need it
     # nixVulkanIntel
-
-    # Nerd Fonts
-    nerd-fonts.fantasque-sans-mono
-    nerd-fonts.caskaydia-cove
 
     ## Core dev packages
     alejandra # assume systems using nix might need to edit nix
