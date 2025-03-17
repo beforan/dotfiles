@@ -1,0 +1,15 @@
+# for use with the official Trino helm chart
+# helm repo add trino https://trinodb.github.io/charts
+# helm install -f example.yaml example-trino-cluster trino/trino
+# https://trino.io/docs/current/installation/kubernetes.html
+
+image:
+  tag: "472"
+
+catalogs:
+  # catalogs are presumably per-db?
+  pglocal: |-
+    connector.name=postgresql
+    connection-url=jdbc:postgresql://postgres.default.svc.cluster.local:5432/<database>
+    connection-user=postgres
+    connection-password=postgres
