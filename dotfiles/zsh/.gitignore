@@ -1,0 +1,4 @@
+# ignore files zsh modifies
+
+.histfile
+.zcompdump

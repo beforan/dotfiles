@@ -44,7 +44,7 @@ Since Anaconda is itself an isolated userspace tool, it's not so bad. Install it
 
 Some advice:
 
-- install it to `$HOME/opt/conda` rather than the default
+- install it to `$HOME/.local/conda` rather than the default
   - this works with zsh aliases and stuff in these dotfiles, and doesn't care if you use Anaconda Distribution or Miniconda
 - Don't add it to `$PATH` or otherwise do any Shell Initialization (e.g. `conda init`)
   - instead use the `conda-activate` zsh alias in these dotfiles to activate the `(base)` environment and then go from there.

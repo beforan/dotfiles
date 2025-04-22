@@ -1,0 +1,29 @@
+# this is my initial Brewfile, expect in future per-host / platform files too
+
+# env vars for `brew bundle exec`
+## Unlikely to use this but good to know it's possible
+## ENV["SOME_ENV_VAR"] = "some_value"
+
+# taps
+
+# casks
+## While primarily macos GUI apps, Font casks are supported on linux
+cask "font-caskaydia-cove-nerd-font"
+cask "font-fantasque-sans-mono-nerd-font"
+
+## brew install (cli apps)
+
+# ZSH and friends
+brew "zsh"
+brew "antigen"
+brew "fzf"
+brew "zoxide"
+brew "atuin"
+brew "eza"
+brew "starship"
+
+# general utilities
+
+brew "fastfetch"
+brew "bat"
+# brew "btop" # if not already installed (e.g. Bazzite)
