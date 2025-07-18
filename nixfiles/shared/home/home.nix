@@ -85,8 +85,12 @@ in {
     dirHashes = {
       s = "$HOME/src";
     };
-    # TODO: should we always add snaps? what if snapd is not installed?
-    initExtra = ''
+
+    ### .zshrc manual Content
+    # TODO: move to dotfile?
+    # - pre-add snaps path in case they're used
+    # - add default appImage path TODO: make path less user specific and also decide where is sensible (e.g. ~/.local/Applications?)
+    initContent = ''
       export PATH=/home/beforan/opt/appimage:$PATH
       export PATH=$PATH:/snap/bin
     '';
@@ -121,8 +125,7 @@ in {
   };
 
   # core dev tooling
-
-  # programs.vscode.enable = true; # TODO: should it be here? it's currently in `/home/dev`
+  programs.vscode.enable = true;
 
   # git
   programs.git = {

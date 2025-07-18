@@ -22,13 +22,13 @@
 
     ## Apps
 
-    # gitkraken # TODO may not need if lazygit is awesome
+    gitkraken
 
     # TODO flatpak godot probably?
     # (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)
-  ];
 
-  programs.vscode.enable = true;
+    azure-cli
+  ];
 
   # TODO: maybe per project flake?
   programs.bun.enable = true;
