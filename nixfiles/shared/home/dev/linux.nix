@@ -10,6 +10,6 @@
 
     ## Apps
 
-    jetbrains-toolbox # nix for this, but it then installs jb stuff "locally" in home
+    jetbrains-toolbox # nix for this, but it then installs jb stuff "locally" in home # NOTE: manual config of linux-fallback needed
   ];
 }

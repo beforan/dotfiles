@@ -28,6 +28,8 @@
     # (config.lib.nixGL.wrap godot_4) # TODO keep looking out for Mono just in case ;)
 
     azure-cli
+
+    quarto
   ];
 
   # TODO: maybe per project flake?

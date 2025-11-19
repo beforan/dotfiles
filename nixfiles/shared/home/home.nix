@@ -39,6 +39,8 @@ in {
     # TODO: move to the new way
     (stable.nerdfonts.override {fonts = ["FantasqueSansMono" "CascadiaCode"];})
 
+    winePackages.fonts
+
     # bitwarden-desktop # TODO: not on macos
 
     # nixGLIntel # TODO move nixGL only to machines that need it
@@ -130,9 +132,14 @@ in {
   # git
   programs.git = {
     enable = true;
-    delta.enable = true;
     includes = [{path = "~/src/.dotfiles/dotfiles/.gitconfig";}]; # TODO: make this less hardcoded to the target checkout path?
   };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
+
   programs.lazygit.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
