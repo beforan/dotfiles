@@ -49,6 +49,8 @@ in {
     ## Core dev packages
     alejandra # assume systems using nix might need to edit nix
 
+    zellij
+
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -92,9 +94,14 @@ in {
     # TODO: move to dotfile?
     # - pre-add snaps path in case they're used
     # - add default appImage path TODO: make path less user specific and also decide where is sensible (e.g. ~/.local/Applications?)
+    # - specify default DOTNET manual installation path - Rider also uses this?
+    # - add that DOTNET path to PATH so the cli and global tools work for any shared .NET installation
     initContent = ''
       export PATH=/home/beforan/opt/appimage:$PATH
       export PATH=$PATH:/snap/bin
+
+      export DOTNET_ROOT=$HOME/.dotnet
+      export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
     '';
   };
 

@@ -5,9 +5,9 @@
 #
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    minikube
     kubectl
     kubernetes-helm
     k9s
+    kind
   ];
 }

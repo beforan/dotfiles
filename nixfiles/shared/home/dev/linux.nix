@@ -10,6 +10,6 @@
 
     ## Apps
 
-    jetbrains-toolbox # nix for this, but it then installs jb stuff "locally" in home # NOTE: manual config of linux-fallback needed
+    # jetbrains-toolbox # just download locally; essentially appimage - it then installs jb tools "locally" in user home
   ];
 }

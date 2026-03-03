@@ -15,6 +15,13 @@
   home.packages = with pkgs; [
     ## Tools / SDKs
 
+    # no dotnet
+    #   - Rider (isolated by jetbrains toolbox) installs it to a shared user location
+    #     - and default nixfiles have already configured said location
+    #   - because the SDKs are "manually" installed by Rider
+    #     - uninstalling them is just delete that SDK from `$DOTNET_ROOT/sdk`
+    #     - uninstalling runtimes is similar, from `$DOTNET_ROOT/shared`
+
     # no node - nvm is installed with zsh in `shared/home.nix`, so use that to manage user-space node versions
 
     # python312 # Python and nix is kinda ALL IN so let's not do it here # TODO: what about as a system package on NixOS?
